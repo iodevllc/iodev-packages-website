@@ -1,0 +1,8 @@
+title: IODEV Website Packages
+description: Compare the IODEV Essential and Premium website packages side by side.
+
+exclude:
+  - README.md
+  - packages.txt
+  - branding-notes.txt
+  - iodev-logo.png

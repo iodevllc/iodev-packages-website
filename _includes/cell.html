@@ -1,0 +1,10 @@
+<div class="cell" data-package="{{ include.package }}">
+  {%- if include.value == true -%}
+    <span class="mark yes" aria-hidden="true"></span><span class="sr-only">Included</span>
+  {%- elsif include.value == false -%}
+    <span class="mark no" aria-hidden="true"></span><span class="sr-only">Not available</span>
+  {%- else -%}
+    <span class="value">{{ include.value }}</span>
+  {%- endif -%}
+  {%- if include.sub -%}<span class="sub">{{ include.sub }}</span>{%- endif -%}
+</div>

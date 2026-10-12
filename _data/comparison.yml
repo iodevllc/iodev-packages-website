@@ -1,0 +1,146 @@
+# Source of truth for the comparison matrix on websites.html.
+#
+# Each row takes:
+#   label                  - the feature name (left column)
+#   note                   - optional small text under the label
+#   essential / premium    - true (check mark), false (dash), or text
+#   essential_sub / premium_sub        - optional small text under the value
+#   detail                 - optional accordion text shared by both packages
+#   detail_essential / detail_premium  - optional accordion text per package
+
+packages:
+  essential:
+    name: Essential
+    price: "$1,000 – $2,500"
+    terms: one-time fee
+  premium:
+    name: Premium
+    price: "$2,500 – $5,000"
+    terms: one-time fee
+
+groups:
+  - title: Your website
+    rows:
+      - label: Website pages
+        essential: "5 – 15"
+        premium: "10 – 20"
+
+      - label: Website type
+        essential: Static
+        essential_sub: Changes require coding
+        premium: Dynamic
+        premium_sub: Self-manageable
+        detail_essential: >-
+          A static website is made of pre-built pages. There's no admin
+          dashboard or database behind it, which is why it needs no ongoing
+          software updates and can be hosted for free. It also means that
+          making changes to the site requires coding knowledge.
+        detail_premium: >-
+          A dynamic website runs on WordPress, so you can log in and manage
+          your own content. The trade-off is that it needs paid hosting and
+          regular software updates.
+
+      - label: Blog support
+        essential: false
+        premium: true
+
+      - label: Software updates
+        essential: None required
+        premium: Highly recommended
+        detail_essential: >-
+          No recurring software updates are required.
+        detail_premium: >-
+          Recurring software and plugin updates are highly recommended. Some
+          web hosts support auto-updates, or you can add our Monthly Software
+          Updates / Maintenance add-on.
+
+      - label: Form submissions
+        essential: 50 / month
+        premium: 300 / day
+        premium_sub: 9,000 / month
+        detail_essential: >-
+          Need more? Additional form submissions are available through
+          <a href="https://formspree.io/plans" target="_blank" rel="noopener">Formspree's paid plans</a>.
+        detail_premium: >-
+          Need more? Additional form submissions are available through
+          <a href="https://www.brevo.com/pricing/see-all-features/" target="_blank" rel="noopener">Brevo's paid plans</a>.
+
+      - label: You own your website code
+        essential: true
+        premium: true
+        detail: >-
+          The website is yours. You own the code and have the "keys to the
+          castle". You're never locked into a specific website host, and your
+          site can be transferred elsewhere without requiring a rebuild.
+
+  - title: Costs
+    rows:
+      - label: Payment terms
+        essential: 50% upfront
+        essential_sub: 50% upon completion
+        premium: 50% upfront
+        premium_sub: 50% upon completion
+
+      - label: Hosting
+        essential: Free
+        premium: Paid
+        premium_sub: "$20 – $40 / month"
+        detail_essential: >-
+          Hosting is free, so there's no monthly hosting bill. We leverage
+          GitHub Pages for free hosting.
+        detail_premium: >-
+          WordPress hosting ranges from $20 – $40 per month. We recommend
+          WP Engine or Pressable. Cheaper WordPress hosts exist, but they're
+          not as reliable. It's up to you if you want to go cheaper.
+
+  - title: Search & analytics setup
+    rows:
+      - label: Search Engine Optimization
+        essential: true
+        premium: true
+        detail: >-
+          Your site is built so that search engines can find, read, and rank
+          your pages.
+
+      - label: Google Business Profile setup
+        essential: true
+        premium: true
+        detail: >-
+          Your Google Business Profile is the listing that shows your business
+          in Google Search and Google Maps.
+
+      - label: Google Search Console setup
+        essential: true
+        premium: true
+        detail: >-
+          Google Search Console shows how your site appears in Google Search
+          and flags any issues Google has reading it.
+
+      - label: Bing Webmaster Tools setup
+        essential: true
+        premium: true
+        detail: >-
+          Bing Webmaster Tools is the Search Console equivalent for Microsoft's
+          Bing search engine.
+
+      - label: Google Analytics setup
+        essential: true
+        premium: true
+        detail: >-
+          Google Analytics tracks how many people visit your site, how they
+          found it, and what they look at.
+
+  - title: Optional add-ons
+    rows:
+      - label: Monthly SEO Strategy
+        note: "$150 / month"
+        essential: Available
+        premium: Available
+
+      - label: Monthly Software Updates / Maintenance
+        note: "$150 / month"
+        essential: false
+        premium: Available
+        detail: >-
+          This add-on is for the Premium package only. The Essential package's
+          static website doesn't require recurring software updates.

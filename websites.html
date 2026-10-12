@@ -1,0 +1,372 @@
+---
+---
+{%- assign essential = site.data.comparison.packages.essential -%}
+{%- assign premium = site.data.comparison.packages.premium -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <style>
+    :root {
+      --ink: #202336;
+      --ink-soft: #5a5f7a;
+      --accent: #6c78b0;
+      --accent-deep: #535b8c;
+      --accent-soft: #aeb5d8;
+      --accent-pale: #e4e7f3;
+      --page: #f4f5fa;
+      --surface: #ffffff;
+      --line: #e3e5ef;
+      --radius: 14px;
+      --cols: minmax(200px, 1.15fr) 1fr 1fr;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-deep); }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------- Hero ---------- */
+
+    .hero {
+      background: var(--ink);
+      color: #fff;
+      padding: 36px 0 120px;
+    }
+
+    .hero img {
+      display: block;
+      height: 40px;
+      width: auto;
+    }
+
+    .hero h1 {
+      margin: 56px 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 34em;
+      color: var(--accent-soft);
+      font-size: 1.1rem;
+    }
+
+    /* ---------- Matrix ---------- */
+
+    .matrix {
+      margin-top: -72px;
+      margin-bottom: 96px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 2px rgba(32, 35, 54, 0.06), 0 12px 32px rgba(32, 35, 54, 0.1);
+    }
+
+    .cells {
+      display: grid;
+      grid-template-columns: var(--cols);
+    }
+
+    .cells > * {
+      padding: 16px 20px;
+      min-width: 0;
+    }
+
+    .cells > * + * { border-left: 1px solid var(--line); }
+
+    /* Package headers stay pinned while the rows scroll underneath. */
+    .heads {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--surface);
+      border-bottom: 2px solid var(--ink);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .heads > * { padding: 22px 20px; }
+
+    .heads .corner {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .toggle-all {
+      appearance: none;
+      border: 1px solid var(--accent-soft);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--accent-deep);
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+
+    .toggle-all:hover { background: var(--accent-pale); }
+
+    .package-name {
+      margin: 0;
+      color: var(--accent-deep);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .package-price {
+      margin: 4px 0 0;
+      font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .package-terms {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+
+    .group-title {
+      margin: 0;
+      padding: 10px 20px;
+      background: var(--accent-pale);
+      color: var(--accent-deep);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .row { border-bottom: 1px solid var(--line); }
+    .matrix > .row:last-child { border-bottom: 0; }
+
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .note {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .value { font-weight: 600; }
+
+    .sub {
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+
+    .mark {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+
+    .mark.yes {
+      background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12.5l3.5 3.5L17 9'/%3E%3C/svg%3E") center / 100% no-repeat;
+    }
+
+    .mark.no {
+      background: linear-gradient(var(--accent-soft), var(--accent-soft)) center / 12px 2px no-repeat;
+    }
+
+    /* ---------- Accordion rows ---------- */
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #fafbfe; }
+
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    summary .label::after {
+      content: "";
+      flex: none;
+      width: 9px;
+      height: 9px;
+      margin: -4px 4px 0 0;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(45deg);
+      transition: transform 0.15s ease;
+    }
+
+    details[open] summary .label::after { transform: translateY(4px) rotate(-135deg); }
+
+    .detail {
+      background: #fafbfe;
+      border-top: 1px dashed var(--line);
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .detail .shared {
+      grid-column: 2 / -1;
+      text-align: center;
+    }
+
+    /* ---------- Small screens: label on its own line, packages stay side by side ---------- */
+
+    @media (max-width: 700px) {
+      :root { --cols: 1fr 1fr; }
+
+      .hero { padding-top: 28px; }
+      .hero img { height: 32px; }
+      .hero h1 { margin-top: 40px; }
+
+      .cells > * { padding: 12px 14px; }
+
+      .cells > .label,
+      .heads > .corner {
+        grid-column: 1 / -1;
+        border-left: 0;
+        padding-bottom: 0;
+      }
+
+      .heads > .corner {
+        justify-content: flex-end;
+        padding-top: 12px;
+      }
+
+      .heads > * { padding: 10px 14px 14px; }
+      .cells > .label + * { border-left: 0; }
+      .group-title { padding: 10px 14px; }
+
+      .detail > .spacer { display: none; }
+      .detail .shared { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <img src="{{ '/logo-transparent-bg.png' | relative_url }}" alt="IODEV" width="1989" height="361">
+      <h1>Website Packages</h1>
+      <p>Two ways to get your business online. Compare them side by side, and tap any row with an arrow for more detail.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="matrix">
+
+      <div class="cells heads">
+        <div class="corner">
+          <button class="toggle-all" type="button" aria-pressed="false">Expand all</button>
+        </div>
+        {%- for package in site.data.comparison.packages %}
+        <div class="cell">
+          <h2 class="package-name">{{ package[1].name }}</h2>
+          <p class="package-price">{{ package[1].price }}</p>
+          <p class="package-terms">{{ package[1].terms }}</p>
+        </div>
+        {%- endfor %}
+      </div>
+
+      {%- for group in site.data.comparison.groups %}
+      <h3 class="group-title">{{ group.title }}</h3>
+
+      {%- for row in group.rows %}
+      {%- capture cells %}
+          <div class="label">
+            <span>{{ row.label }}{% if row.note %}<span class="note">{{ row.note }}</span>{% endif %}</span>
+          </div>
+          {% include cell.html package=essential.name value=row.essential sub=row.essential_sub %}
+          {% include cell.html package=premium.name value=row.premium sub=row.premium_sub %}
+      {%- endcapture %}
+
+      {%- if row.detail or row.detail_essential or row.detail_premium %}
+      <details class="row">
+        <summary class="cells">{{ cells }}
+        </summary>
+        <div class="cells detail">
+          <div class="spacer"></div>
+          {%- if row.detail %}
+          <div class="shared">{{ row.detail }}</div>
+          {%- else %}
+          <div><span class="sr-only">{{ essential.name }}: </span>{{ row.detail_essential }}</div>
+          <div><span class="sr-only">{{ premium.name }}: </span>{{ row.detail_premium }}</div>
+          {%- endif %}
+        </div>
+      </details>
+      {%- else %}
+      <div class="row cells">{{ cells }}
+      </div>
+      {%- endif %}
+      {%- endfor %}
+      {%- endfor %}
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var button = document.querySelector('.toggle-all');
+      var rows = document.querySelectorAll('details.row');
+
+      button.addEventListener('click', function () {
+        var open = button.getAttribute('aria-pressed') !== 'true';
+        rows.forEach(function (row) { row.open = open; });
+        button.setAttribute('aria-pressed', open);
+        button.textContent = open ? 'Collapse all' : 'Expand all';
+      });
+    })();
+  </script>
+
+</body>
+</html>
