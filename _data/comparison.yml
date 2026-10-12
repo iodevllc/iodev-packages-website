@@ -71,7 +71,7 @@ groups:
         detail: >-
           The website is yours. You own the code and have the "keys to the
           castle". You're never locked into a specific website host, and your
-          site can be transferred elsewhere without requiring a rebuild.
+          site can be transferred elsewhere without requiring a complete rebuild.
 
   - title: Costs
     rows:
