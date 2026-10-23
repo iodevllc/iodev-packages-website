@@ -73,6 +73,14 @@ groups:
           castle". You're never locked into a specific website host, and your
           site can be transferred elsewhere without requiring a complete rebuild.
 
+      - label: Number of revisions
+        essential: 1 round
+        premium: 2 rounds
+        detail: >-
+          A round of revisions is a meeting where we review the website
+          together, discuss your feedback, and agree on changes. We then make
+          those changes and send the updated site back to you.
+
   - title: Costs
     rows:
       - label: Payment terms
