@@ -6,3 +6,4 @@ exclude:
   - packages.txt
   - branding-notes.txt
   - iodev-logo.png
+  - login.html

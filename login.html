@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Client Pricing System | IODEV</title>
+
+        <style>
+            :root {
+                --brand-navy: #1d202f;
+                --brand-surface: #262a3d;
+                --brand-border: #353a52;
+                --brand-primary: #6d77b0;
+                --brand-primary-dark: #535b8c;
+                --brand-light: #aeb6d8;
+                --brand-pale: #c9cfe5;
+                --brand-text: #ffffff;
+            }
+
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--brand-navy);
+                color: var(--brand-pale);
+                font-family: "Arial", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .login-page {
+                width: 400px;
+                max-width: 100%;
+                padding: 24px 16px;
+                box-sizing: border-box;
+            }
+
+            .login-card {
+                background: var(--brand-surface);
+                padding: 45px;
+                box-sizing: border-box;
+                text-align: center;
+                border: 1px solid var(--brand-border);
+                border-radius: 12px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            }
+
+            .login-logo {
+                display: block;
+                width: 100%;
+                max-width: 220px;
+                height: auto;
+                margin: 0 auto 28px;
+            }
+
+            .login-title {
+                font-size: 1.5em;
+                font-weight: 600;
+                color: var(--brand-text);
+                margin: 0;
+            }
+
+            .login-hr {
+                margin: 24px 0;
+                border: 0;
+                border-top: 1px solid var(--brand-border);
+            }
+
+            .login-password {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                margin: 0 0 15px;
+                padding: 15px;
+                background: var(--brand-navy);
+                border: 1px solid var(--brand-border);
+                border-radius: 8px;
+                color: var(--brand-text);
+                font-size: 16px;
+                outline: 0;
+            }
+
+            .login-password::placeholder {
+                color: var(--brand-light);
+                opacity: 0.7;
+            }
+
+            .login-password:focus {
+                border-color: var(--brand-primary);
+            }
+
+            .login-button {
+                width: 100%;
+                padding: 15px;
+                background: var(--brand-primary);
+                border: 0;
+                border-radius: 8px;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: background 0.15s ease;
+            }
+
+            .login-button:hover,
+            .login-button:focus {
+                background: var(--brand-primary-dark);
+                outline: 0;
+            }
+
+            @media screen and (max-width: 420px) {
+                .login-card {
+                    padding: 32px 24px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <main class="login-page">
+            <div class="login-card">
+                <img class="login-logo" src="logo-transparent-bg.png" alt="IODEV" />
+
+                <h1 class="login-title">Client Pricing System</h1>
+
+                <hr class="login-hr" />
+
+                <form action="#" method="post">
+                    <input class="login-password" type="password" name="password" placeholder="Password" aria-label="Password" autofocus />
+                    <button class="login-button" type="submit">Decrypt</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
